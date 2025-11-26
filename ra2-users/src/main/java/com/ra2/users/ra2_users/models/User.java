@@ -8,6 +8,7 @@ public class User {
     private String description;
     private String email;
     private String password;
+    private String image_path;
     private Timestamp ultimAcces;
     private Timestamp dataCreated;
     private Timestamp dataUpdated;
@@ -55,5 +56,13 @@ public class User {
         return "User [id=" + id + ", nom=" + nom + ", description=" + description + ", email=" + email
                 + ", password=" + password + ", ultimAcces=" + ultimAcces
                 + ", dataCreated=" + dataCreated + ", dataUpdated=" + dataUpdated + "]";
+    }
+
+    public String getImage_path() {
+        return image_path;
+    }
+
+    public void setImage_path(String image) {
+        this.image_path = image;
     }
 }
