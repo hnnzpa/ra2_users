@@ -106,6 +106,16 @@ public class UserController {
         }
     }
     
+    //fitres json 
+    @PostMapping("/users/upload-json")
+    public ResponseEntity<String> postJson(@RequestParam MultipartFile jsonFile) throws Exception{
+        String[] resposta = userService.postJson(jsonFile);
+        if (resposta[0].equals("ok")){
+            return ResponseEntity.ok("S'han afegit " + resposta[1]);
+        }else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resposta[1]);
+        }
+    }
 
 
 }

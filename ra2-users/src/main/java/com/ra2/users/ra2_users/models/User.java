@@ -15,6 +15,18 @@ public class User {
 
     public User() {}
 
+    public User(Long id, String nom, String description, String email, String password, String image_path,
+                Timestamp ultimAcces, Timestamp dataCreated, Timestamp dataUpdated) {
+        this.id = id;
+        this.nom = nom;
+        this.description = description;
+        this.email = email;
+        this.password = password;
+        this.image_path = image_path;
+        this.ultimAcces = ultimAcces;
+        this.dataCreated = dataCreated;
+        this.dataUpdated = dataUpdated;
+    }
     public User(Long id, String nom, String description, String email, String password,
                 Timestamp ultimAcces, Timestamp dataCreated, Timestamp dataUpdated) {
         this.id = id;

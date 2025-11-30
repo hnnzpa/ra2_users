@@ -1,6 +1,7 @@
 package com.ra2.users.ra2_users.services;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ra2.users.ra2_users.models.User;
 import com.ra2.users.ra2_users.respositories.UserRepository;
 
@@ -24,6 +27,9 @@ public class UserService {
     private static final Path PATH_CSV = Paths.get("csv");
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
@@ -79,7 +85,7 @@ public class UserService {
         return new String[] {"ok", destino.toString()}; 
     }
 
-    public String[] postCSV(@RequestParam MultipartFile csvFile){
+    public String[] postCSV(MultipartFile csvFile){
         
         String linea;
         String arxiu = csvFile.getOriginalFilename();
@@ -107,14 +113,45 @@ public class UserService {
                 String[] info = linea.split(",");
 
                 // Añade la linea a la base de dades
-                userRepository.save(new User(null, info[0], info[1], info[2], info[3], null, null, null));
+                userRepository.save(new User(null, info[0], info[1], info[2], info[3],null, null, null, null));
             }
 
         } catch (IOException e) {
                 return new String[] {"e", "No s'ha pogut lleguir el fitxer"};
         }
-
+ 
         return new String[] {"ok", destino.toString()};
+    }
+
+
+    public String[] postJson(MultipartFile jsonFile) throws Exception {
+        // fitxer json principi
+        JsonNode arrel = objectMapper.readTree(jsonFile.getInputStream());
+        //accedir al primer nivell
+        JsonNode data = arrel.path("data");
+        int count = data.path("count").asInt();
+        String control = data.path("control").asText();
+        JsonNode users = data.path("users");
+
+        for (JsonNode user : users) {
+            //Obtenir el nom de l'habilitat
+            String nom = user.path("name").asText();
+            String description = user.path("description").asText();
+            String email = user.path("email").asText();
+            String password = user.path("password").asText();
+            
+            //crear usuari
+            User usuari = new User(null, nom, description, email, password, null, null, null, null);
+            try{
+                userRepository.save(usuari);
+            }catch(Exception e){
+                System.out.println("No s'ha pogut desar l'usuari " + nom);
+            }
+
+        }
+        
+        return new String[] {"ok", "Usuari desat correctament"};
+        
     }
 }
 
