@@ -1,0 +1,16 @@
+[2025-12-09 21:26:55] INFO - UserService - getAllUsers - Accedint a getAllUsers
+[2025-12-09 21:27:19] INFO - UserService - createUser - Accedint a createUser amb dades: string, string
+[2025-12-09 21:27:19] INFO - UserService - createUser - Usuari creat correctament
+[2025-12-09 21:27:24] INFO - UserService - createUser - Accedint a createUser amb dades: string, string
+[2025-12-09 21:27:24] ERROR - UserService - createUser - Error creant usuari. Exception: PreparedStatementCallback; SQL [INSERT INTO users (nom, description, email, password, dataCreated, dataUpdated) VALUES (?, ?, ?, ?, ?, ?)]; Duplicate entry 'string' for key 'users.email'
+[2025-12-09 21:27:34] INFO - UserService - getAllUsers - Accedint a getAllUsers
+[2025-12-09 21:27:52] INFO - UserService - updateUserName - Accedint a updateUserName amb id: 1 i nou nom: Hannaaaaaaaa
+[2025-12-09 21:27:52] INFO - UserService - updateUserName - Nom de l'usuari amb id 1 actualitzat a: Hannaaaaaaaa
+[2025-12-09 21:27:52] INFO - UserService - getUserById - Accedint a getUserById amb id: 1
+[2025-12-09 21:28:04] INFO - UserService - updateUserName - Accedint a updateUserName amb id: 8 i nou nom: Hannaaaaaaaa
+[2025-12-09 21:28:04] ERROR - UserService - updateUserName - Error actualitzant nom d'usuari. Exception: Index 0 out of bounds for length 0
+[2025-12-09 21:28:21] INFO - UserService - deleteUser - Accedint a deleteUser amb id: 1
+[2025-12-09 21:28:21] INFO - UserService - deleteUser - Usuari amb id 1 esborrat correctament
+[2025-12-09 21:28:25] INFO - UserService - deleteUser - Accedint a deleteUser amb id: 1
+[2025-12-09 21:28:25] ERROR - UserService - deleteUser - Error esborrant usuari. Exception: Index 0 out of bounds for length 0
+[2025-12-09 21:28:30] INFO - UserService - getAllUsers - Accedint a getAllUsers
